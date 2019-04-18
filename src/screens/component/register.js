@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
-import {Text,View,StyleSheet,SafeAreaView,TextInput} from 'react-native';
+import {Text,View,StyleSheet,SafeAreaView,TextInput,DatePickerIOS,TouchableOpacity} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {AppButton} from '../subcomponent/appButton'
+import {AppButton} from '../subcomponent/appButton';
+import Constant from '../../common/contsant'
+import {DatePickerDialog} from 'react-native-datepicker-dialog'
+var moment = require('moment');
+
 export default class Register extends Component{
     constructor(props){
         super(props);
@@ -11,8 +15,25 @@ export default class Register extends Component{
             email:' ',
             phone:' ',
             pass:' ',
-            cpass:' '
+            cpass:' ',
+            newDate:new Date(),
+            DateText:'Select Your Birth Date'
+
         }
+    }
+
+    datePicker = () =>{
+        this.refs.DatePickerDialog.open({
+
+            date: this.state.newDate,
+            DateText: moment(this.state.newDate).format('DD-MMM-YYYY')
+
+        })
+    };
+    ondatePicked = (date)=>{
+        this.setState({
+            DateText:moment(date).format('DD-MMM-YYYY')
+        })
     }
     onSignUp = () =>{
         fetch("http://192.168.200.129:3001/user", {
@@ -47,6 +68,8 @@ export default class Register extends Component{
                container,
                inputstyle,
                inputs,btnStyle,btn}=styles;
+        //this.state.DateText=moment(this.state.newDate).format('DD-MMM-YYYY')
+
         return(
             <SafeAreaView style={mainconatiner}>
                 <View style={subcontainer}>
@@ -78,6 +101,15 @@ export default class Register extends Component{
                                    placeholderTextColor="#fff"
                                    keyboardType={"numeric"}
                                    onChangeText={text=>{this.setState({phone:text})}}/>
+                    </View>
+                    <View >
+                        <TouchableOpacity onPress={this.datePicker.bind(this)}>
+                            <View style={inputstyle}>
+                                <Text style={styles.datePickerText}>{this.state.DateText}</Text>
+
+                            </View>
+                        </TouchableOpacity>
+                        <DatePickerDialog ref="DatePickerDialog" onDatePicked={this.ondatePicked.bind(this)}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Password"
@@ -150,5 +182,25 @@ const styles=StyleSheet.create({
     },
     btn:{
         margin: 20
-    }
+    },
+    datePickerBox:{
+        marginTop: 9,
+        borderColor: '#FF5722',
+        borderWidth: 0.5,
+        padding: 0,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderBottomRightRadius: 4,
+        height: 38,
+        justifyContent:'center'
+    },
+
+    datePickerText: {
+        fontSize: 14,
+        marginLeft: 5,
+        borderWidth: 0,
+        color: '#fff',
+
+    },
 });
