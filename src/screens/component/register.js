@@ -47,7 +47,8 @@ export default class Register extends Component{
                 lastName: this.state.lname,
                 email: this.state.email,
                 phoneNo: this.state.phone,
-                password: this.state.pass
+                password: this.state.pass,
+                DOB:this.state.DateText
             })
         }).then((res)=>{
             return res.json();
@@ -67,7 +68,7 @@ export default class Register extends Component{
                subcontainer,
                container,
                inputstyle,
-               inputs,btnStyle,btn}=styles;
+               inputs,btnStyle,btn,datePickerText}=styles;
         //this.state.DateText=moment(this.state.newDate).format('DD-MMM-YYYY')
 
         return(
@@ -105,8 +106,7 @@ export default class Register extends Component{
                     <View >
                         <TouchableOpacity onPress={this.datePicker.bind(this)}>
                             <View style={inputstyle}>
-                                <Text style={styles.datePickerText}>{this.state.DateText}</Text>
-
+                                <Text style={datePickerText}>{this.state.DateText}</Text>
                             </View>
                         </TouchableOpacity>
                         <DatePickerDialog ref="DatePickerDialog" onDatePicked={this.ondatePicked.bind(this)}/>
@@ -183,22 +183,9 @@ const styles=StyleSheet.create({
     btn:{
         margin: 20
     },
-    datePickerBox:{
-        marginTop: 9,
-        borderColor: '#FF5722',
-        borderWidth: 0.5,
-        padding: 0,
-        borderTopLeftRadius: 4,
-        borderTopRightRadius: 4,
-        borderBottomLeftRadius: 4,
-        borderBottomRightRadius: 4,
-        height: 38,
-        justifyContent:'center'
-    },
-
     datePickerText: {
         fontSize: 14,
-        marginLeft: 5,
+        marginLeft: 16,
         borderWidth: 0,
         color: '#fff',
 
