@@ -32,7 +32,7 @@ export default class Register extends Component{
             return res.json();
         }).then((result)=>{
             if(!result.error)
-            alert("Register Successfully!")
+            alert("User Register Successfully!")
             else
                 alert(result.error)
         }).catch((err)=>{
