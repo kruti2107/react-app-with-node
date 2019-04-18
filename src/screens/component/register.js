@@ -3,6 +3,17 @@ import {Text,View,StyleSheet,SafeAreaView,TextInput} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {AppButton} from '../subcomponent/appButton'
 export default class Register extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            fname:' ',
+            lname:' ',
+            email:' ',
+            phone:' ',
+            pass:' ',
+            cpass:' '
+        }
+    }
     onSignUp = () =>{
 
     }
@@ -22,36 +33,42 @@ export default class Register extends Component{
                     <View style={inputstyle}>
                         <TextInput placeholder="FirstName"
                                    style={inputs}
-                                   placeholderTextColor="#fff"/>
+                                   placeholderTextColor="#fff"
+                                   onChangeText={text=>{this.setState({fname:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="LastName"
                                    style={inputs}
-                                   placeholderTextColor="#fff"/>
+                                   placeholderTextColor="#fff"
+                                   onChangeText={text=>{this.setState({lname:text})}}/>/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Email"
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   keyboardType={"email-address"}/>
+                                   keyboardType={"email-address"}
+                                   onChangeText={text=>{this.setState({email:text})}}/>/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Phone Number"
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   keyboardType={"numeric"}/>
+                                   keyboardType={"numeric"}
+                                   onChangeText={text=>{this.setState({phone:text})}}/>/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Password"
                                    secureTextEntry={true}
                                    style={inputs}
-                                   placeholderTextColor="#fff"/>
+                                   placeholderTextColor="#fff"
+                                   onChangeText={text=>{this.setState({pass:text})}}/>/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="ConfirmPassword"
                                    secureTextEntry={true}
                                    style={inputs}
-                                   placeholderTextColor="#fff"/>
+                                   placeholderTextColor="#fff"
+                                   onChangeText={text=>{this.setState({cpass:text})}}/>/>
                     </View>
                     <View style={btn}>
                     <AppButton  title={'Sign Up'}
