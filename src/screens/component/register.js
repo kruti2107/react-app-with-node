@@ -15,8 +15,31 @@ export default class Register extends Component{
         }
     }
     onSignUp = () =>{
+        fetch("http://192.168.200.129:3001/user", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: this.state.fname,
+                lastName: this.state.lname,
+                email: this.state.email,
+                phoneNo: this.state.phone,
+                password: this.state.pass
+            })
+        }).then((res)=>{
+            return res.json();
+        }).then((result)=>{
+            if(!result.error)
+            alert("Register Successfully!")
+            else
+                alert(result.error)
+        }).catch((err)=>{
+            alert(err)
+        })
+       };
 
-    }
     render(){
         const {mainconatiner,
                txtStyle,
@@ -34,41 +57,41 @@ export default class Register extends Component{
                         <TextInput placeholder="FirstName"
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   onChangeText={text=>{this.setState({fname:text})}}/>
+                                    onChangeText={text=>{this.setState({fname:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="LastName"
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   onChangeText={text=>{this.setState({lname:text})}}/>/>
+                                   onChangeText={text=>{this.setState({lname:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Email"
                                    style={inputs}
                                    placeholderTextColor="#fff"
                                    keyboardType={"email-address"}
-                                   onChangeText={text=>{this.setState({email:text})}}/>/>
+                                   onChangeText={text=>{this.setState({email:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Phone Number"
                                    style={inputs}
                                    placeholderTextColor="#fff"
                                    keyboardType={"numeric"}
-                                   onChangeText={text=>{this.setState({phone:text})}}/>/>
+                                   onChangeText={text=>{this.setState({phone:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="Password"
                                    secureTextEntry={true}
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   onChangeText={text=>{this.setState({pass:text})}}/>/>
+                                   onChangeText={text=>{this.setState({pass:text})}}/>
                     </View>
                     <View style={inputstyle}>
                         <TextInput placeholder="ConfirmPassword"
                                    secureTextEntry={true}
                                    style={inputs}
                                    placeholderTextColor="#fff"
-                                   onChangeText={text=>{this.setState({cpass:text})}}/>/>
+                                   onChangeText={text=>{this.setState({cpass:text})}}/>
                     </View>
                     <View style={btn}>
                     <AppButton  title={'Sign Up'}
