@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import {SafeAreaView,View,Button,Image,StyleSheet,Text} from 'react-native';
+import {View,Button,Image,StyleSheet,Text} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import RNFetchBlob from 'rn-fetch-blob';
+
 
 export default class AddProduct extends Component{
     constructor(props) {
