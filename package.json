@@ -10,8 +10,10 @@
     "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.4",
+    "react-native-camera": "^2.6.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-datepicker-dialog": "0.0.9",
+    "react-native-image-picker": "^0.28.1",
     "react-native-responsive-screen": "^1.2.2",
     "redux": "^4.0.1"
   },

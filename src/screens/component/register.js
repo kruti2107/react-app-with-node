@@ -1,8 +1,7 @@
 import React,{Component} from 'react';
-import {Text,View,StyleSheet,SafeAreaView,TextInput,DatePickerIOS,TouchableOpacity} from 'react-native';
+import {Text,View,StyleSheet,SafeAreaView,TextInput,Image,TouchableOpacity,Button,ScrollView} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {AppButton} from '../subcomponent/appButton';
-import Constant from '../../common/contsant'
 import {DatePickerDialog} from 'react-native-datepicker-dialog'
 var moment = require('moment');
 
@@ -17,7 +16,8 @@ export default class Register extends Component{
             pass:' ',
             cpass:' ',
             newDate:new Date(),
-            DateText:'Select Your Birth Date'
+            DateText:'Select Your Birth Date',
+            photo:null
 
         }
     }
@@ -69,13 +69,25 @@ export default class Register extends Component{
                container,
                inputstyle,
                inputs,btnStyle,btn,datePickerText}=styles;
-        //this.state.DateText=moment(this.state.newDate).format('DD-MMM-YYYY')
+
 
         return(
+
             <SafeAreaView style={mainconatiner}>
+
                 <View style={subcontainer}>
                     <Text style={txtStyle}>Sign Up</Text>
                 </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    {this.state.photo && (
+                        <Image
+                            source={{ uri: photo.uri }}
+                            style={{ width: 300, height: 300 }}
+                        />
+                    )}
+                    <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
+                </View>
+
                 <View style={ container}>
                     <View style={inputstyle}>
                         <TextInput placeholder="FirstName"
@@ -135,7 +147,9 @@ export default class Register extends Component{
                         <AppButton  title={'Already have an account?Login here'} extraStyle={{fontWeight: 'normal'}}/>
                     </View>
                 </View>
+
             </SafeAreaView>
+
         )
     }
 }
