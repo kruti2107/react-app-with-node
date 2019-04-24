@@ -1,11 +1,16 @@
 import React,{Component} from 'react';
 import {SafeAreaView,View,Button,Image,StyleSheet,Text} from 'react-native';
-import ImagePicker from 'react-native-image-picker'
+import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'rn-fetch-blob';
+
 export default class AddProduct extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            filepath:" "
+            filepath:" ",
+            data:" ",
+            name:'xyz',
+            price:'30'
 
         }
     }
@@ -23,10 +28,30 @@ export default class AddProduct extends Component{
         };
         ImagePicker.showImagePicker(options, response => {
             console.log('Response = ', response);
-            this.setState({filepath:response.uri});
+            this.setState({filepath:response.uri,
+            data:response.data});
             console.log(this.state.filepath)
+            this.uploadToServer()
 
         });
+    };
+
+    uploadToServer = ()=>{
+        const data=new FormData();
+        data.append('productname','xyz');
+        data.append('image',{
+            uri:this.state.filepath,
+            type:'image/jpeg',
+            name:'image.jpeg'
+        });
+        data.append('price','10');
+        fetch('http://localhost:3001/product',{
+            method:"POST",
+            body:data
+        }).then(res=>{
+            console.log(res)
+        })
+
     };
 
     render() {
